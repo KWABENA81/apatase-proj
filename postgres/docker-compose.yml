@@ -16,8 +16,8 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - db_apatase_network
-    #restart: unless-stopped
+      - postgres_pgadmin_network
+    #restart: unless-stopped      # save for prod
 
   pgadmin:
     container_name: pgadmin_container
@@ -32,25 +32,15 @@ services:
     ports:
       - "5050:80"
     networks:
-          - db_apatase_network
-    #restart: unless-stopped
+          - postgres_pgadmin_network
+    #restart: unless-stopped      # save for prod
     depends_on:
       - postgres
 
-networks:
-   db_apatase_network: {}
-   default:
-      external:
-        name: apatase_network
-    # external: true
-    #   name: apatase_network
 
-    # driver: bridge
-    #  default:  networks:
-  # default:
-  #   external:
-  #     name: NAME
-    # docker network create --driver bridge alpine-net
+networks:
+   postgres_pgadmin_network: {}
+
 
 volumes:
   postgres:
